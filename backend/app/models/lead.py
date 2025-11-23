@@ -13,6 +13,16 @@ class LeadStatus(str, enum.Enum):
     LOST = "lost"
 
 
+class LeadSource(str, enum.Enum):
+    WEBSITE = "website"
+    WALK_IN = "walk_in"
+    PHONE = "phone"
+    SOCIAL_MEDIA = "social_media"
+    REFERRAL = "referral"
+    EVENT = "event"
+    OTHER = "other"
+
+
 class Lead(Base, BaseModel):
     __tablename__ = "leads"
 
@@ -20,7 +30,7 @@ class Lead(Base, BaseModel):
     name = Column(String(100), nullable=False)
     email = Column(String(255), nullable=True)
     phone = Column(String(20), nullable=True)
-    source = Column(String(100), nullable=True)
+    source = Column(SQLEnum(LeadSource), nullable=False, default=LeadSource.OTHER)
     status = Column(SQLEnum(LeadStatus), default=LeadStatus.NEW)
     assigned_to = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True)
     notes = Column(String(1000), nullable=True)
