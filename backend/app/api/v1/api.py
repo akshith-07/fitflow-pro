@@ -15,7 +15,8 @@ from app.api.v1.endpoints import (
     analytics,
     invoices,
     notifications,
-    reports
+    reports,
+    websocket
 )
 
 api_router = APIRouter()
@@ -57,3 +58,6 @@ api_router.include_router(reports.router, prefix="/reports", tags=["reports"])
 
 # Notifications
 api_router.include_router(notifications.router, prefix="/notifications", tags=["notifications"])
+
+# WebSocket
+api_router.include_router(websocket.router, tags=["websocket"])
