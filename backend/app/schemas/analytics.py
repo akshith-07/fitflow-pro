@@ -7,29 +7,37 @@ from uuid import UUID
 # Dashboard Analytics
 class DashboardMetrics(BaseModel):
     current_occupancy: int
-    members_checked_in_today: int
+    checkins_today: int
+    checkins_yesterday: int
     revenue_today: float
     revenue_yesterday: float
     active_memberships: int
     new_members_today: int
     expiring_memberships_this_week: int
-    overdue_payments_count: int
+    overdue_payments: int
     class_bookings_today: int
 
 
 # Member Analytics
 class MemberAnalytics(BaseModel):
     total_members: int
-    active_members: int
-    frozen_members: int
-    expired_members: int
-    cancelled_members: int
-    member_growth_rate: float
-    churn_rate: float
-    retention_rate: float
-    average_lifetime_value: float
-    member_acquisition_cost: float
-    demographics: Dict[str, Any]
+    total_active: int
+    total_frozen: int
+    total_expired: int
+    total_cancelled: int
+    member_growth: List[Dict[str, Any]]
+    gender_distribution: List[Dict[str, Any]]
+
+
+# Revenue Analytics
+class RevenueAnalytics(BaseModel):
+    total_revenue: float
+    mrr: float
+    arr: float
+    revenue_by_payment_method: List[Dict[str, Any]]
+    daily_revenue: List[Dict[str, Any]]
+    start_date: Any
+    end_date: Any
 
 
 # Financial Analytics
@@ -45,24 +53,23 @@ class FinancialAnalytics(BaseModel):
 
 # Attendance Analytics
 class AttendanceAnalytics(BaseModel):
-    total_check_ins_today: int
-    total_check_ins_this_week: int
-    total_check_ins_this_month: int
+    total_checkins: int
+    daily_checkins: List[Dict[str, Any]]
     peak_hours: List[Dict[str, Any]]
     average_session_duration_minutes: float
-    member_engagement_score: float
-    inactive_members_count: int
+    start_date: Any
+    end_date: Any
 
 
 # Class Analytics
 class ClassAnalytics(BaseModel):
-    total_classes: int
-    average_attendance_rate: float
-    most_popular_classes: List[Dict[str, Any]]
-    least_popular_classes: List[Dict[str, Any]]
-    waitlist_trends: List[Dict[str, Any]]
+    popular_classes: List[Dict[str, Any]]
+    average_attendance: List[Dict[str, Any]]
+    total_bookings: int
+    no_shows: int
     no_show_rate: float
-    revenue_by_class_type: List[Dict[str, Any]]
+    start_date: Any
+    end_date: Any
 
 
 # Trainer Performance

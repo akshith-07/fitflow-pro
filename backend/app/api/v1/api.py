@@ -11,7 +11,11 @@ from app.api.v1.endpoints import (
     payments,
     staff,
     leads,
-    equipment
+    equipment,
+    analytics,
+    invoices,
+    notifications,
+    reports
 )
 
 api_router = APIRouter()
@@ -37,11 +41,19 @@ api_router.include_router(classes.router, prefix="/classes", tags=["classes"])
 api_router.include_router(trainers.router, prefix="/trainers", tags=["trainers"])
 api_router.include_router(staff.router, prefix="/staff", tags=["staff"])
 
-# Payments
+# Payments & Invoices
 api_router.include_router(payments.router, prefix="/payments", tags=["payments"])
+api_router.include_router(invoices.router, prefix="/invoices", tags=["invoices"])
 
 # Leads
 api_router.include_router(leads.router, prefix="/leads", tags=["leads"])
 
 # Equipment
 api_router.include_router(equipment.router, prefix="/equipment", tags=["equipment"])
+
+# Analytics & Reports
+api_router.include_router(analytics.router, prefix="/analytics", tags=["analytics"])
+api_router.include_router(reports.router, prefix="/reports", tags=["reports"])
+
+# Notifications
+api_router.include_router(notifications.router, prefix="/notifications", tags=["notifications"])
