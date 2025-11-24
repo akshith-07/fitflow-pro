@@ -54,8 +54,14 @@ class InvoiceBase(BaseModel):
     line_items: List[Dict[str, Any]] = Field(default_factory=list)
 
 
-class InvoiceCreate(InvoiceBase):
-    payment_id: Optional[UUID] = None
+class InvoiceCreate(BaseModel):
+    member_id: UUID
+    amount: float = Field(..., gt=0)
+    tax_amount: float = Field(default=0, ge=0)
+    issue_date: Optional[date] = None
+    due_date: date
+    line_items: List[Dict[str, Any]] = Field(default_factory=list)
+    status: Optional[str] = "draft"
 
 
 class InvoiceUpdate(BaseModel):
